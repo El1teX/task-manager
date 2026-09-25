@@ -1,15 +1,4 @@
 # Beads — трекер привычек
-
-[![Deploy to GitHub Pages](https://github.com/El1teX/task-manager/actions/workflows/deploy.yml/badge.svg)](https://github.com/El1teX/task-manager/actions/workflows/deploy.yml)
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
-![Vue](https://img.shields.io/badge/Vue-3-42B883?logo=vuedotjs&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-
-Каждая привычка — нитка, каждый выполненный день — бусина. Дни подряд соединяются цветной нитью, поэтому серию видно с первого взгляда.
-
-Одно и то же приложение написано дважды: на **React** и на **Vue**. Логика, стили и формат данных у версий общие, отличается только слой интерфейса — удобно сравнивать подходы двух фреймворков на реальном проекте.
-
 ![Beads на компьютере](docs/screenshot-desktop.webp)
 
 <p align="center">
@@ -46,10 +35,6 @@ npm install
 npm run dev:react   # http://localhost:5173 — версия на React
 npm run dev:vue     # http://localhost:5173 — версия на Vue
 ```
-
-Откройте адрес из терминала в браузере. Изменения в коде подхватываются сразу, перезагружать страницу не нужно. Остановить сервер — `Ctrl + C`.
-
-Если порт 5173 занят, Vite сам возьмёт следующий свободный и покажет адрес в терминале.
 
 Чтобы собрать production-версию и посмотреть её локально:
 
