@@ -2,19 +2,17 @@
   "name": "task-manager",
   "version": "1.0.0",
   "private": true,
-  "description": "Beads — трекер привычек в двух реализациях: React и Vue",
+  "description": "Beads — трекер привычек на React",
   "license": "MIT",
   "workspaces": [
     "packages/core",
-    "apps/react",
-    "apps/vue"
+    "apps/react"
   ],
   "scripts": {
-    "dev:react": "npm run dev -w apps/react",
-    "dev:vue": "npm run dev -w apps/vue",
-    "test": "npm run test -w packages/core",
-    "build": "npm run build -w apps/react && npm run build -w apps/vue && node scripts/build-landing.mjs",
-    "preview": "npx vite preview --outDir dist"
+    "dev": "npm run dev -w apps/react",
+    "build": "npm run build -w apps/react",
+    "preview": "npm run preview -w apps/react",
+    "test": "npm run test -w packages/core"
   },
   "engines": {
     "node": ">=18"
