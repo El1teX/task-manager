@@ -1,11 +1,7 @@
 # Beads — трекер привычек
-![Beads на компьютере](docs/screenshot-desktop.webp)
 
-<p align="center">
-  <img src="docs/screenshot-mobile.webp" alt="Beads на телефоне, тёмная тема" width="293" />
-</p>
 
-**Демо:** [el1tex.github.io/task-manager](https://el1tex.github.io/task-manager/) — откроется после включения GitHub Pages (см. раздел «Публикация на GitHub Pages»).
+
 
 ## Содержание
 
