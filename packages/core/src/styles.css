@@ -1,0 +1,859 @@
+/* ==========================================================================
+   Beads — общие стили для React- и Vue-версии.
+   Идея: каждая привычка — нитка, каждый выполненный день — бусина.
+   Подряд идущие бусины соединяются цветной нитью: так серия видна сразу.
+   ========================================================================== */
+
+:root {
+  --paper: #e8edf3;
+  --surface: #f7f9fb;
+  --ink: #1e2740;
+  --ink-soft: #5a6480;
+  --line: #cbd3de;
+  --thread: #a3aec0;
+  --focus: #3a5ccc;
+  --danger: #b3261e;
+
+  --font-display: 'Unbounded', 'Arial Black', system-ui, sans-serif;
+  --font-body: 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --cell: 30px;
+  --radius-lg: 20px;
+  --radius-sm: 10px;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #161c2b;
+    --surface: #1f2638;
+    --ink: #e6eaf2;
+    --ink-soft: #98a2b8;
+    --line: #323b52;
+    --thread: #4a5470;
+    --focus: #8ea6ff;
+    --danger: #ff8a80;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --paper: #161c2b;
+  --surface: #1f2638;
+  --ink: #e6eaf2;
+  --ink-soft: #98a2b8;
+  --line: #323b52;
+  --thread: #4a5470;
+  --focus: #8ea6ff;
+  --danger: #ff8a80;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Каркас ---------- */
+
+.app {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 40px) 32px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: clamp(24px, 5vw, 56px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.brand__mark {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.brand__mark span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Кнопки ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.btn:hover {
+  border-color: var(--ink-soft);
+}
+
+.btn--primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.btn--primary:hover {
+  background: var(--ink-soft);
+  border-color: var(--ink-soft);
+}
+
+.btn--danger {
+  color: var(--danger);
+  border-color: transparent;
+  padding-inline: 8px;
+}
+
+.btn--danger:hover {
+  border-color: var(--danger);
+}
+
+.btn--quiet {
+  border-color: transparent;
+  color: var(--ink-soft);
+}
+
+.btn--quiet:hover {
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: var(--line);
+  color: var(--ink);
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Заголовок дня ---------- */
+
+.today {
+  margin-bottom: 32px;
+}
+
+.today__weekday,
+.today__date {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+.today__weekday {
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+}
+
+.today__date {
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.today__progress {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin: 20px 0 0;
+  font-size: 1.05rem;
+}
+
+.today__summary {
+  margin: 0;
+}
+
+.today__summary strong {
+  font-weight: 600;
+}
+
+/* Маленькая нитка «сегодня»: по бусине на каждую привычку */
+.today-thread {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  padding: 0 4px;
+}
+
+.today-thread::before {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 2px;
+  background: var(--thread);
+  transform: translateY(-50%);
+}
+
+.today-thread span {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--thread);
+  background: var(--paper);
+}
+
+.today-thread span.is-done {
+  border: 0;
+  background:
+    radial-gradient(circle at 34% 30%, rgb(255 255 255 / 0.55) 0 16%, transparent 18%),
+    var(--c);
+}
+
+/* ---------- Список привычек ---------- */
+
+.list-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 0 8px;
+  border-bottom: 1.5px solid var(--line);
+}
+
+.list-head__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.axis {
+  display: flex;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.axis span {
+  width: var(--cell);
+  text-align: center;
+  line-height: 1.15;
+}
+
+.axis span b {
+  display: block;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.axis span.is-today {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.axis span.is-today b {
+  font-weight: 700;
+  opacity: 1;
+}
+
+.habits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.habit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.habit__main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.habit__emoji {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  font-size: 1.3rem;
+  background: color-mix(in srgb, var(--c) 16%, transparent);
+}
+
+.habit__text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.habit__name {
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1.02rem;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.habit__name:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.habit.is-selected .habit__name {
+  text-decoration: underline;
+  text-decoration-color: var(--c);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.habit__streak {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.habit__side {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---------- Нитка с бусинами ---------- */
+
+.beads {
+  position: relative;
+  display: flex;
+}
+
+.beads::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--cell) / 2);
+  right: calc(var(--cell) / 2);
+  top: 50%;
+  height: 2px;
+  background: var(--thread);
+  transform: translateY(-50%);
+}
+
+.bead {
+  position: relative;
+  width: var(--cell);
+  height: var(--cell);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Цветная нить между соседними выполненными днями */
+.bead.is-linked::before {
+  content: '';
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  width: var(--cell);
+  height: 4px;
+  background: var(--c);
+  transform: translateY(-50%);
+}
+
+.bead__dot {
+  position: relative;
+  z-index: 1;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--thread);
+  background: var(--paper);
+  transition: transform 0.15s ease;
+}
+
+.bead:hover .bead__dot {
+  transform: scale(1.25);
+  border-color: var(--c);
+}
+
+.bead.is-done .bead__dot {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  background:
+    radial-gradient(circle at 34% 30%, rgb(255 255 255 / 0.55) 0 14%, transparent 16%),
+    var(--c);
+  box-shadow: inset 0 -3px 4px rgb(0 0 0 / 0.22);
+  animation: bead-pop 0.28s ease-out;
+}
+
+.bead.is-done:hover .bead__dot {
+  transform: scale(1.08);
+}
+
+.bead.is-today .bead__dot {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@keyframes bead-pop {
+  0% {
+    transform: scale(0.4);
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* На узких экранах показываем последние 7 дней */
+@media (max-width: 640px) {
+  :root {
+    --cell: 34px;
+  }
+
+  .beads > :nth-child(-n + 7),
+  .axis > :nth-child(-n + 7) {
+    display: none;
+  }
+
+  .habit {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .habit__side {
+    justify-content: flex-end;
+  }
+
+  /* Первая видимая бусина не должна тянуть нить из скрытых дней */
+  .beads > :nth-child(8)::before {
+    display: none;
+  }
+}
+
+/* ---------- Пустое состояние ---------- */
+
+.empty {
+  padding: 48px 0;
+  max-width: 34rem;
+}
+
+.empty__thread {
+  position: relative;
+  display: inline-flex;
+  gap: 22px;
+  margin-bottom: 24px;
+  padding-left: 4px;
+}
+
+.empty__thread::before {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 2px;
+  background: var(--thread);
+}
+
+.empty__thread span {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--thread);
+  background: var(--paper);
+}
+
+.empty h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+
+.empty p {
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+}
+
+.empty__examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ---------- Панель статистики ---------- */
+
+.stats {
+  position: sticky;
+  top: 24px;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.stats__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 12px;
+  margin: 0 0 24px;
+}
+
+.stats__grid div {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.stats__grid dt {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.stats__grid dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.stats__caption {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.stats__hint {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* Тепловая карта: колонки — недели, строки — дни с понедельника */
+.heatmap {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 1fr);
+  gap: 3px;
+  overflow-x: auto;
+}
+
+.heatmap span {
+  width: 13px;
+  height: 13px;
+  border-radius: 4px;
+  background: var(--line);
+}
+
+.heatmap span.is-done {
+  background: var(--c);
+}
+
+.heatmap span.is-future {
+  background: transparent;
+}
+
+.heatmap span.is-today {
+  outline: 1.5px solid var(--ink);
+  outline-offset: 1px;
+}
+
+/* ---------- Подвал ---------- */
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer__status {
+  flex-basis: 100%;
+  min-height: 1.5em;
+}
+
+.footer__status.is-error {
+  color: var(--danger);
+}
+
+/* ---------- Диалог ---------- */
+
+.dialog {
+  width: min(480px, calc(100vw - 32px));
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 24px 64px rgb(20 28 50 / 0.3);
+}
+
+.dialog::backdrop {
+  background: rgb(22 28 43 / 0.45);
+}
+
+.dialog[open] {
+  animation: dialog-in 0.2s ease-out;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.form {
+  display: grid;
+  gap: 22px;
+  padding: 28px;
+}
+
+.form__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.field__label {
+  padding: 0;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+}
+
+.input:focus-visible {
+  border-color: var(--focus);
+  outline-offset: 0;
+}
+
+.field__error {
+  margin: 0;
+  color: var(--danger);
+  font-size: 0.88rem;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.choice {
+  position: relative;
+}
+
+.choice input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.choice__face {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.choice input:checked + .choice__face {
+  border-color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+
+.choice input:focus-visible + .choice__face {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.choice__face--color {
+  border-radius: 50%;
+  border: 0;
+  background:
+    radial-gradient(circle at 34% 30%, rgb(255 255 255 / 0.5) 0 14%, transparent 16%),
+    var(--c);
+}
+
+.choice input:checked + .choice__face--color {
+  box-shadow:
+    0 0 0 3px var(--surface),
+    0 0 0 5px var(--ink);
+}
+
+.form__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form__actions .spacer {
+  flex: 1;
+}
+
+/* ---------- Доступность движения ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
