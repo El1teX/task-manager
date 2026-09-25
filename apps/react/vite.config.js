@@ -6,7 +6,7 @@ export default defineConfig({
   // Относительные пути — сборка работает на GitHub Pages в любой подпапке
   base: './',
   build: {
-    outDir: '../../dist/react',
+    outDir: '../../dist',
     emptyOutDir: true,
   },
 });
